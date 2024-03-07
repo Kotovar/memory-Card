@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
-import EndGame from './EndGame';
 import {useState} from 'react';
+import GameCard from './GameCard';
+import EndGame from './EndGame';
 
 export default function ActiveGame({
 	difficult,
 	bestResult,
 	onUpdateBestResult,
+	onChangeMode,
 }) {
 	const [currentResult, setCurrentResult] = useState(0);
 	const [gameOver, setGameOver] = useState(false);
@@ -16,6 +18,13 @@ export default function ActiveGame({
 		hard: 10,
 	};
 
+	function closeModal() {
+		setGameOver(false);
+	}
+
+	let cards = new Array(10).fill('');
+	cards = cards.map((el, index) => <GameCard key={index} cardId={index} />);
+
 	return (
 		<>
 			<p>Active game</p>
@@ -24,7 +33,11 @@ export default function ActiveGame({
 
 			<p>{`Уровень игры: ${difficult}`}</p>
 			<p>{`Количество раундов: ${gameSettings[difficult]}`}</p>
-			{gameOver && <EndGame />}
+			<button onClick={() => setGameOver(true)}>Open modal</button>
+			{gameOver && (
+				<EndGame onChangeMode={onChangeMode} onCloseModal={closeModal} />
+			)}
+			{cards}
 		</>
 	);
 }
@@ -33,4 +46,5 @@ ActiveGame.propTypes = {
 	difficult: PropTypes.string,
 	bestResult: PropTypes.number,
 	onUpdateBestResult: PropTypes.func,
+	onChangeMode: PropTypes.func,
 };

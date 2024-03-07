@@ -13,6 +13,10 @@ function App() {
 		setGameState('game');
 	}
 
+	function changeMode(mode) {
+		setGameState(mode);
+	}
+
 	function updateBestResult(score) {
 		if (score > bestResult) {
 			setBestResult(score);
@@ -47,6 +51,7 @@ function App() {
 					difficult={difficult}
 					bestResult={bestResult}
 					onUpdateBestResult={updateBestResult}
+					onChangeMode={changeMode}
 				/>
 			)}
 		</>
@@ -54,8 +59,3 @@ function App() {
 }
 
 export default App;
-
-// - useState для хранения лучшего результата, который будет сохраняться в локалсторадж и оттуда загружаться при первом рендере.
-// - useState для хранения текущего уровня сложности.
-// - useState для хранения текущего статуса, что нужно рендерить: "Стартовое окно", "Игра", "Победа", "Поражение". В зависимости от статуса -
-// рендерит 1 из 3х дочерних компонент. По умолчанию - "Стартовое окно"
