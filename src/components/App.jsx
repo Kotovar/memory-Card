@@ -6,15 +6,25 @@ function App() {
 	const initialScore = 0;
 	const [bestResult, setBestResult] = useState(loadFromLocalStorage());
 	const [difficult, setDifficult] = useState('easy'); // 'easy', 'medium', 'hard'
-	const [gameState, setGameState] = useState('start'); // 'start', 'game', 'win', 'defeat'
+	const [gameState, setGameState] = useState('loading'); // 'loading', 'start', 'game', 'win', 'defeat'
+	const [loadingFinish, setLoadingFinish] = useState(false); // загрузилось ли минимальное количество изображений
 	const [cards, setCards] = useState([]); // массив всех изображений
 
 	const FIRST_IMAGE = 84;
-	const NUMBER_OF_ALL_IMAGES = 80;
-	const NUMBER_OF_IMAGES_FOR_LOAD = 10;
-	const NUMBER_OF_LOADINGS = Math.ceil(
-		NUMBER_OF_ALL_IMAGES / NUMBER_OF_IMAGES_FOR_LOAD,
-	);
+	const LAST_IMAGE = 164;
+	const NUMBER_OF_ALL_IMAGES = LAST_IMAGE - FIRST_IMAGE;
+
+	const gameRounds = {
+		easy: 5,
+		medium: 7,
+		hard: 10,
+	};
+
+	const gameNumberCardsForRound = {
+		easy: 3,
+		medium: 5,
+		hard: 10,
+	};
 
 	useEffect(() => {
 		async function loadImages(firstImage) {
@@ -27,17 +37,26 @@ function App() {
 			});
 		}
 
-		for (let i = 0; i < NUMBER_OF_LOADINGS; i++) {
-			loadImages(FIRST_IMAGE + i * NUMBER_OF_IMAGES_FOR_LOAD);
+		for (let i = 0; i < NUMBER_OF_ALL_IMAGES; i++) {
+			loadImages(FIRST_IMAGE + i * 1);
 		}
 	}, []);
+
+	useEffect(() => {
+		if (cards.length >= gameNumberCardsForRound['hard'] && !loadingFinish) {
+			setLoadingFinish(true);
+			setGameState('start');
+		}
+	}, [cards]);
 
 	async function downloadImages(firstImage) {
 		let imagesArray = [];
 
-		for (let i = 0; i < NUMBER_OF_IMAGES_FOR_LOAD; i++) {
+		for (let i = 0; i < 1; i++) {
 			const imageInfo = await getImageNameAndSource(firstImage + i);
-			imagesArray.push(imageInfo);
+			if (imageInfo) {
+				imagesArray.push(imageInfo);
+			}
 		}
 		return imagesArray;
 	}
@@ -96,6 +115,7 @@ function App() {
 
 	return (
 		<>
+			{!loadingFinish && <p>Loading!</p>}
 			{gameState === 'start' && (
 				<StartPage onChangeDifficult={changeDifficult} />
 			)}
@@ -106,6 +126,8 @@ function App() {
 					onUpdateBestResult={updateBestResult}
 					onChangeMode={changeMode}
 					cards={cards}
+					gameNumberCardsForRound={gameNumberCardsForRound}
+					gameRounds={gameRounds}
 				/>
 			)}
 		</>
