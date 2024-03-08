@@ -1,9 +1,15 @@
 import PropTypes from 'prop-types';
 
-export default function GameCard({cardId}) {
-	return <p>{`Это игровая карточка номер: ${cardId}`}</p>;
+export default function GameCard({url, name}) {
+	return (
+		<div className="game-card">
+			<img src={url} alt={`Изображение ${name}`} />
+			<p>{`Существо : ${name}`}</p>
+		</div>
+	);
 }
 
 GameCard.propTypes = {
-	cardId: PropTypes.number,
+	url: PropTypes.string,
+	name: PropTypes.string,
 };

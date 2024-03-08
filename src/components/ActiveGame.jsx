@@ -8,6 +8,7 @@ export default function ActiveGame({
 	bestResult,
 	onUpdateBestResult,
 	onChangeMode,
+	cards,
 }) {
 	const [currentResult, setCurrentResult] = useState(0);
 	const [gameOver, setGameOver] = useState(false);
@@ -22,8 +23,9 @@ export default function ActiveGame({
 		setGameOver(false);
 	}
 
-	let cards = new Array(10).fill('');
-	cards = cards.map((el, index) => <GameCard key={index} cardId={index} />);
+	// const gameCards =
+	// 	cards.length > 0 &&
+	// 	cards.map((el) => <GameCard key={el[0]} url={el[2]} name={el[1]} />);
 
 	return (
 		<>
@@ -34,10 +36,13 @@ export default function ActiveGame({
 			<p>{`Уровень игры: ${difficult}`}</p>
 			<p>{`Количество раундов: ${gameSettings[difficult]}`}</p>
 			<button onClick={() => setGameOver(true)}>Open modal</button>
+			<button onClick={() => console.log(cards)}>
+				Показать количество изображений
+			</button>
 			{gameOver && (
 				<EndGame onChangeMode={onChangeMode} onCloseModal={closeModal} />
 			)}
-			{cards}
+			{/* {gameCards} */}
 		</>
 	);
 }
@@ -47,4 +52,5 @@ ActiveGame.propTypes = {
 	bestResult: PropTypes.number,
 	onUpdateBestResult: PropTypes.func,
 	onChangeMode: PropTypes.func,
+	cards: PropTypes.array,
 };
