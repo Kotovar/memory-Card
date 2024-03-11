@@ -16,14 +16,17 @@ export default function ActiveGame({
 	const [currentResult, setCurrentResult] = useState(0);
 	const [gameOver, setGameOver] = useState(false);
 	const [currentGameCards, setCurrentGameCards] = useState([]);
+	const [isClickable, setIsClickable] = useState(true);
 	const selectedCards = useRef([]);
 	const isGameWon = useRef(false);
+	const DURATION_ANIMATON = 200;
 
 	useEffect(() => {
 		newRound();
 	}, []);
 
 	function clickImage(e) {
+		if (!isClickable) return;
 		const currentId = e.target.dataset.id;
 
 		if (currentId && !selectedCards.current.includes(currentId)) {
@@ -52,7 +55,6 @@ export default function ActiveGame({
 			currentCardsForMix,
 		); // массив индексов, которые должны быть замешаны в изначальный массив
 
-		console.log(currentShuffledIdCardsForMix); //
 		let startArr = currentShuffledIdCardsForMix.map((id) =>
 			arr.find((el) => el[0] === Number(id)),
 		); // Уже использованные карточки, для замешивания в новый список
@@ -86,11 +88,16 @@ export default function ActiveGame({
 	}
 
 	function newRound() {
+		setIsClickable(false);
 		const randomCards = getRandomElements(
 			cards,
 			gameNumberCardsForRound[difficult],
 		);
-		setCurrentGameCards(randomCards);
+
+		setTimeout(() => {
+			setCurrentGameCards(randomCards);
+			setIsClickable(true);
+		}, DURATION_ANIMATON);
 	}
 
 	function closeModal() {
@@ -141,4 +148,5 @@ ActiveGame.propTypes = {
 	cards: PropTypes.array,
 	gameNumberCardsForRound: PropTypes.object,
 	gameRounds: PropTypes.object,
+	numberCardsToMix: PropTypes.array,
 };
