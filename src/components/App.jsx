@@ -27,6 +27,19 @@ function App() {
 		hard: 10,
 	};
 
+	const numberCardsToMix = {
+		0: 0,
+		1: 1,
+		2: 1,
+		3: 2,
+		4: 2,
+		5: 3,
+		6: 5,
+		7: 6,
+		8: 7,
+		9: 8,
+	};
+
 	useEffect(() => {
 		async function loadImages(firstImage) {
 			const images = await downloadImages(firstImage);
@@ -125,11 +138,12 @@ function App() {
 				<ActiveGame
 					difficult={difficult}
 					bestResult={bestResult}
-					onUpdateBestResult={updateBestResult}
-					onChangeMode={changeMode}
 					cards={cards}
-					gameNumberCardsForRound={gameNumberCardsForRound}
 					gameRounds={gameRounds}
+					gameNumberCardsForRound={gameNumberCardsForRound}
+					numberCardsToMix={numberCardsToMix}
+					onChangeMode={changeMode}
+					onUpdateBestResult={updateBestResult}
 				/>
 			)}
 		</>
