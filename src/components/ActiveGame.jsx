@@ -61,7 +61,7 @@ export default function ActiveGame({
 
 		let startId = currentShuffledIdCardsForMix.map((id) =>
 			arr.findIndex((el) => el[0] === Number(id)),
-		); // Id уже использованных карточкек из оригинального массива изображений, для замешивания в новый список
+		); // id уже использованных карточкек из оригинального массива изображений, для замешивания в новый список
 
 		const randomElements = [...startArr];
 		const usedIndices = new Set(startId); // Добавление индексов, чтобы такие элементы не замешивались в новый список карточек
@@ -148,5 +148,5 @@ ActiveGame.propTypes = {
 	cards: PropTypes.array,
 	gameNumberCardsForRound: PropTypes.object,
 	gameRounds: PropTypes.object,
-	numberCardsToMix: PropTypes.array,
+	numberCardsToMix: PropTypes.object,
 };

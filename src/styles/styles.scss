@@ -1,7 +1,8 @@
 @import 'normalize';
-
-.game--cards {
-	display: flex;
-	column-gap: 20px;
-	flex-wrap: wrap;
-}
+@import 'varibles';
+@import 'globals';
+@import 'mixins';
+@import 'media';
+@import 'utils';
+@import 'blocks/loading';
+@import 'blocks/game';
