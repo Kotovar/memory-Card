@@ -16,7 +16,7 @@ export default function ActiveGame({
 	const [gameOver, setGameOver] = useState(false);
 	const [currentGameCards, setCurrentGameCards] = useState([]);
 	const selectedCards = useRef([]);
-	let isGameWon = false;
+	const isGameWon = useRef(false);
 
 	useEffect(() => {
 		newRound();
@@ -31,10 +31,8 @@ export default function ActiveGame({
 			newRound();
 			if (selectedCards.current.length === gameRounds[difficult]) {
 				onUpdateBestResult(currentResult);
-				console.log(isGameWon);
-				isGameWon = true;
+				isGameWon.current = true;
 				setGameOver(true);
-				console.log(isGameWon);
 			}
 		} else if (currentId) {
 			onUpdateBestResult(currentResult);
@@ -72,7 +70,7 @@ export default function ActiveGame({
 	function resetGame() {
 		setCurrentResult(0);
 		selectedCards.current = [];
-		isGameWon = false;
+		isGameWon.current = false;
 	}
 
 	return (
@@ -81,17 +79,6 @@ export default function ActiveGame({
 				<p>Active game</p>
 				<p>{`Score: ${currentResult}`}</p>
 				<p>{`Best score ${bestResult}`}</p>
-
-				<p>{`Уровень игры: ${difficult}`}</p>
-				<p>{`Количество раундов: ${gameRounds[difficult]}`}</p>
-				<button onClick={() => setGameOver(true)}>Open modal</button>
-				<button
-					onClick={() => {
-						newRound();
-					}}
-				>
-					New round
-				</button>
 			</div>
 			<div className="game--cards" onClick={(e) => clickImage(e)}>
 				{currentGameCards.map((el) => (
@@ -103,7 +90,7 @@ export default function ActiveGame({
 					<EndGame
 						onChangeMode={onChangeMode}
 						onCloseModal={closeModal}
-						isGameWon={isGameWon}
+						isGameWon={isGameWon.current}
 					/>
 				)}
 			</div>

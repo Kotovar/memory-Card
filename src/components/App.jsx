@@ -40,6 +40,7 @@ function App() {
 		for (let i = 0; i < NUMBER_OF_ALL_IMAGES; i++) {
 			loadImages(FIRST_IMAGE + i * 1);
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {
@@ -47,6 +48,7 @@ function App() {
 			setLoadingFinish(true);
 			setGameState('start');
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [cards]);
 
 	async function downloadImages(firstImage) {
