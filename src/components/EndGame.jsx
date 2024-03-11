@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import {useRef} from 'react';
 
-export default function EndGame({onChangeMode, onCloseModal}) {
+export default function EndGame({onChangeMode, onCloseModal, isGameWon}) {
 	const dialogRef = useRef(null);
 
 	const closeDialog = (mode) => {
@@ -18,6 +18,7 @@ export default function EndGame({onChangeMode, onCloseModal}) {
 			open
 		>
 			Game over
+			<p>You {isGameWon ? 'Win' : 'Lose'} !</p>
 			<button onClick={() => closeDialog('game')}>Start again</button>
 			<button onClick={() => closeDialog('start')}>Change difficulty</button>
 		</dialog>

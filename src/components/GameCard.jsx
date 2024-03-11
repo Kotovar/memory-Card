@@ -1,9 +1,14 @@
 import PropTypes from 'prop-types';
 
-export default function GameCard({url, name}) {
+export default function GameCard({url, name, id}) {
 	return (
 		<div className="game-card">
-			<img src={url} alt={`Изображение ${name}`} />
+			<img
+				src={url}
+				alt={`Изображение ${name}`}
+				className="gameImage"
+				data-id={id}
+			/>
 			<p>{`Существо : ${name}`}</p>
 		</div>
 	);
@@ -12,4 +17,5 @@ export default function GameCard({url, name}) {
 GameCard.propTypes = {
 	url: PropTypes.string,
 	name: PropTypes.string,
+	id: PropTypes.number,
 };

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import GameCard from './GameCard';
 import EndGame from './EndGame';
 
@@ -14,14 +14,32 @@ export default function ActiveGame({
 }) {
 	const [currentResult, setCurrentResult] = useState(0);
 	const [gameOver, setGameOver] = useState(false);
-	const [gameCards, setGameCards] = useState([]);
+	const [currentGameCards, setCurrentGameCards] = useState([]);
+	const selectedCards = useRef([]);
+	let isGameWon = false;
 
 	useEffect(() => {
 		newRound();
 	}, []);
 
-	function closeModal() {
-		setGameOver(false);
+	function clickImage(e) {
+		const currentId = e.target.dataset.id;
+
+		if (currentId && !selectedCards.current.includes(currentId)) {
+			selectedCards.current.push(currentId);
+			setCurrentResult(currentResult + 1);
+			newRound();
+			if (selectedCards.current.length === gameRounds[difficult]) {
+				onUpdateBestResult(currentResult);
+				console.log(isGameWon);
+				isGameWon = true;
+				setGameOver(true);
+				console.log(isGameWon);
+			}
+		} else if (currentId) {
+			onUpdateBestResult(currentResult);
+			setGameOver(true);
+		}
 	}
 
 	function getRandomElements(arr, count) {
@@ -43,31 +61,52 @@ export default function ActiveGame({
 			cards,
 			gameNumberCardsForRound[difficult],
 		);
-		setGameCards(randomCards);
+		setCurrentGameCards(randomCards);
+	}
+
+	function closeModal() {
+		setGameOver(false);
+		resetGame();
+	}
+
+	function resetGame() {
+		setCurrentResult(0);
+		selectedCards.current = [];
+		isGameWon = false;
 	}
 
 	return (
 		<>
-			<p>Active game</p>
-			<p>{`Score: ${currentResult}`}</p>
-			<p>{`Best score ${bestResult}`}</p>
+			<div className="game--information">
+				<p>Active game</p>
+				<p>{`Score: ${currentResult}`}</p>
+				<p>{`Best score ${bestResult}`}</p>
 
-			<p>{`Уровень игры: ${difficult}`}</p>
-			<p>{`Количество раундов: ${gameRounds[difficult]}`}</p>
-			<button onClick={() => setGameOver(true)}>Open modal</button>
-			<button
-				onClick={() => {
-					newRound();
-				}}
-			>
-				Показать количество изображений
-			</button>
-			{gameOver && (
-				<EndGame onChangeMode={onChangeMode} onCloseModal={closeModal} />
-			)}
-			{gameCards.map((el) => (
-				<GameCard key={el[0]} url={el[2]} name={el[1]} />
-			))}
+				<p>{`Уровень игры: ${difficult}`}</p>
+				<p>{`Количество раундов: ${gameRounds[difficult]}`}</p>
+				<button onClick={() => setGameOver(true)}>Open modal</button>
+				<button
+					onClick={() => {
+						newRound();
+					}}
+				>
+					New round
+				</button>
+			</div>
+			<div className="game--cards" onClick={(e) => clickImage(e)}>
+				{currentGameCards.map((el) => (
+					<GameCard key={el[0]} id={el[0]} url={el[2]} name={el[1]} />
+				))}
+			</div>
+			<div className="game--dialog">
+				{gameOver && (
+					<EndGame
+						onChangeMode={onChangeMode}
+						onCloseModal={closeModal}
+						isGameWon={isGameWon}
+					/>
+				)}
+			</div>
 		</>
 	);
 }

@@ -1,5 +1,6 @@
 import StartPage from './StartPage';
 import ActiveGame from './ActiveGame';
+import Loading from './Loading';
 import {useState, useEffect} from 'react';
 
 function App() {
@@ -36,7 +37,6 @@ function App() {
 				return [...prevCards, ...newImages];
 			});
 		}
-
 		for (let i = 0; i < NUMBER_OF_ALL_IMAGES; i++) {
 			loadImages(FIRST_IMAGE + i * 1);
 		}
@@ -115,7 +115,7 @@ function App() {
 
 	return (
 		<>
-			{!loadingFinish && <p>Loading!</p>}
+			{gameState === 'loading' && <Loading />}
 			{gameState === 'start' && (
 				<StartPage onChangeDifficult={changeDifficult} />
 			)}
