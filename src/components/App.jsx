@@ -40,26 +40,27 @@ function App() {
 		9: 8,
 	};
 
-	// отключео на время создания анимации
-
-	// useEffect(() => {
-	// 	async function loadImages(firstImage) {
-	// 		const images = await downloadImages(firstImage);
-	// 		setCards((prevCards) => {
-	// 			const newImages = images.filter((image) => {
-	// 				return !prevCards.some((card) => card[0] === image[0]);
-	// 			});
-	// 			return [...prevCards, ...newImages];
-	// 		});
-	// 	}
-	// 	for (let i = 0; i < NUMBER_OF_ALL_IMAGES; i++) {
-	// 		loadImages(FIRST_IMAGE + i * 1);
-	// 	}
-	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, []);
+	// отключить на время создания анимации
 
 	useEffect(() => {
-		if (cards.length >= gameNumberCardsForRound['hard'] && !loadingFinish) {
+		async function loadImages(firstImage) {
+			const images = await downloadImages(firstImage);
+			setCards((prevCards) => {
+				const newImages = images.filter((image) => {
+					return !prevCards.some((card) => card[0] === image[0]);
+				});
+				return [...prevCards, ...newImages];
+			});
+		}
+		for (let i = 0; i < NUMBER_OF_ALL_IMAGES; i++) {
+			loadImages(FIRST_IMAGE + i * 1);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	useEffect(() => {
+		// if (cards.length >= gameNumberCardsForRound['hard'] && !loadingFinish) {
+		if (cards.length === NUMBER_OF_ALL_IMAGES && !loadingFinish) {
 			setLoadingFinish(true);
 			setGameState('start');
 		}

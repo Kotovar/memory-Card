@@ -17,12 +17,27 @@ export default function ActiveGame({
 	const [gameOver, setGameOver] = useState(false);
 	const [currentGameCards, setCurrentGameCards] = useState([]);
 	const [isClickable, setIsClickable] = useState(true);
+
+	const [isFlipping, setIsFlipping] = useState(false);
+
 	const selectedCards = useRef([]);
 	const isGameWon = useRef(false);
-	const DURATION_ANIMATON = 200;
+	const DURATION_ANIMATON = 3000;
+	const START_DURATION_ANIMATON = DURATION_ANIMATON / 2;
 
 	useEffect(() => {
-		newRound();
+		setIsFlipping(true);
+
+		const randomCards = getRandomElements(
+			cards,
+			gameNumberCardsForRound[difficult],
+		);
+
+		setCurrentGameCards(randomCards);
+
+		setTimeout(() => {
+			setIsFlipping(false);
+		}, START_DURATION_ANIMATON);
 	}, []);
 
 	function clickImage(e) {
@@ -89,6 +104,8 @@ export default function ActiveGame({
 
 	function newRound() {
 		setIsClickable(false);
+		setIsFlipping(true);
+
 		const randomCards = getRandomElements(
 			cards,
 			gameNumberCardsForRound[difficult],
@@ -97,6 +114,7 @@ export default function ActiveGame({
 		setTimeout(() => {
 			setCurrentGameCards(randomCards);
 			setIsClickable(true);
+			setIsFlipping(false);
 		}, DURATION_ANIMATON);
 	}
 
@@ -124,7 +142,13 @@ export default function ActiveGame({
 			</div>
 			<div className="game--cards" onClick={(e) => clickImage(e)}>
 				{currentGameCards.map((el) => (
-					<GameCard key={el[0]} id={el[0]} url={el[2]} name={el[1]} />
+					<GameCard
+						// key={el[1]}
+						id={el[0]}
+						url={el[2]}
+						name={el[1]}
+						isFlipping={isFlipping}
+					/>
 				))}
 			</div>
 			<div className="game--dialog">
