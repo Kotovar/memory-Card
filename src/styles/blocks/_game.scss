@@ -1,7 +1,7 @@
 // поменять
 .game--cards {
 	display: flex;
-	column-gap: 20px;
+	gap: 50px;
 	flex-wrap: wrap;
 }
 
@@ -10,7 +10,7 @@
 	width: 280px;
 	height: 280px;
 	position: relative;
-	perspective: 800px;
+	perspective: 1000px;
 }
 
 .flip-in-front {

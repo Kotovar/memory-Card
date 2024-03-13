@@ -7,7 +7,7 @@ function App() {
 	const initialScore = 0;
 	const [bestResult, setBestResult] = useState(loadFromLocalStorage());
 	const [difficult, setDifficult] = useState('easy'); // 'easy', 'medium', 'hard'
-	const [gameState, setGameState] = useState('loading'); // 'loading', 'start', 'game', 'win', 'defeat'
+	const [gameState, setGameState] = useState('loading'); // 'loading', 'start', 'У', 'win', 'defeat'
 	const [loadingFinish, setLoadingFinish] = useState(false); // загрузилось ли минимальное количество изображений
 	const [cards, setCards] = useState([]); // массив всех изображений
 
@@ -39,8 +39,6 @@ function App() {
 		8: 7,
 		9: 8,
 	};
-
-	// отключить на время создания анимации
 
 	useEffect(() => {
 		async function loadImages(firstImage) {
@@ -81,7 +79,7 @@ function App() {
 
 	async function getImageNameAndSource(id) {
 		try {
-			let creatureResponse = await fetch(
+			const creatureResponse = await fetch(
 				`https://botw-compendium.herokuapp.com/api/v2/entry/${id}`,
 			);
 
@@ -89,10 +87,13 @@ function App() {
 				throw new Error(`HTTP error! status: ${creatureResponse.status}`);
 			}
 
-			let creatureData = await creatureResponse.json();
-			let imageUrl = creatureData.data.image;
+			const creatureData = await creatureResponse.json();
+			const imageUrl = creatureData.data.image;
 
-			return [id, creatureData.data.name, imageUrl];
+			const img = new Image();
+			img.src = imageUrl;
+
+			return [id, creatureData.data.name, img];
 		} catch (error) {
 			console.error('Error when retrieving creature data:', error);
 		}

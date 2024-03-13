@@ -22,9 +22,10 @@ export default function ActiveGame({
 
 	const selectedCards = useRef([]);
 	const isGameWon = useRef(false);
-	const DURATION_ANIMATON = 3000;
+	const DURATION_ANIMATON = 1500;
 	const START_DURATION_ANIMATON = DURATION_ANIMATON / 2;
 
+	const lastUpdateRef = useRef(Date.now());
 	useEffect(() => {
 		setIsFlipping(true);
 
@@ -103,6 +104,8 @@ export default function ActiveGame({
 	}
 
 	function newRound() {
+		lastUpdateRef.current = Date.now();
+
 		setIsClickable(false);
 		setIsFlipping(true);
 
@@ -143,10 +146,10 @@ export default function ActiveGame({
 			<div className="game--cards" onClick={(e) => clickImage(e)}>
 				{currentGameCards.map((el) => (
 					<GameCard
-						// key={el[1]}
+						// key={el[0]}
 						id={el[0]}
-						url={el[2]}
 						name={el[1]}
+						img={el[2]}
 						isFlipping={isFlipping}
 					/>
 				))}
