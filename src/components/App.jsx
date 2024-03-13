@@ -57,10 +57,10 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-		// if (cards.length >= gameNumberCardsForRound['hard'] && !loadingFinish) {
 		if (cards.length === NUMBER_OF_ALL_IMAGES && !loadingFinish) {
 			setLoadingFinish(true);
 			setGameState('start');
+			preloadImages(cards); // проверка созданного массива на предзагрузку всех изображений
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [cards]);
@@ -97,6 +97,29 @@ function App() {
 		} catch (error) {
 			console.error('Error when retrieving creature data:', error);
 		}
+	}
+
+	function preloadImages(imageArray) {
+		let loadedCount = 0;
+		const totalImages = imageArray.length;
+
+		imageArray.forEach((imgObject) => {
+			console.log('пошла загрузка');
+			imgObject[2].onload = () => {
+				loadedCount++;
+				if (loadedCount === totalImages) {
+					// Все изображения загружены
+					console.log('Все изображения загружены и готовы к использованию.');
+					// Здесь можно вызвать функцию обратного вызова или обновить состояние
+				}
+			};
+			// Обработка ошибок на случай, если изображение не может быть загружено
+			imgObject[2].onerror = () => {
+				console.error(
+					`Ошибка при загрузке изображения с URL: ${imgObject.img.src}`,
+				);
+			};
+		});
 	}
 
 	function changeDifficult(difficult) {

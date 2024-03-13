@@ -25,7 +25,6 @@ export default function ActiveGame({
 	const DURATION_ANIMATON = 1500;
 	const START_DURATION_ANIMATON = DURATION_ANIMATON / 2;
 
-	const lastUpdateRef = useRef(Date.now());
 	useEffect(() => {
 		setIsFlipping(true);
 
@@ -104,8 +103,6 @@ export default function ActiveGame({
 	}
 
 	function newRound() {
-		lastUpdateRef.current = Date.now();
-
 		setIsClickable(false);
 		setIsFlipping(true);
 
@@ -142,11 +139,12 @@ export default function ActiveGame({
 				<p>Active game</p>
 				<p>{`Score: ${currentResult}`}</p>
 				<p>{`Best score ${bestResult}`}</p>
+				<p>{`${selectedCards.current.length} / ${gameRounds[difficult]}`}</p>
 			</div>
 			<div className="game--cards" onClick={(e) => clickImage(e)}>
 				{currentGameCards.map((el) => (
+					// eslint-disable-next-line react/jsx-key
 					<GameCard
-						// key={el[0]}
 						id={el[0]}
 						name={el[1]}
 						img={el[2]}

@@ -21,7 +21,7 @@ export default function GameCard({name, id, isFlipping, img}) {
 			<div
 				className={`game-card-back ${
 					isFlipping ? 'flip-in-back' : 'flip-out-back'
-				}`}
+				} `}
 			>
 				<img src={backImage} alt="backside" />
 			</div>
@@ -35,5 +35,5 @@ GameCard.propTypes = {
 	id: PropTypes.number,
 	isFlipping: PropTypes.bool,
 	isNew: PropTypes.bool,
-	img: PropTypes.img,
+	img: PropTypes.object,
 };
