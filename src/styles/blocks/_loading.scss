@@ -1,0 +1,35 @@
+.loading {
+	display: grid;
+	grid-template-rows: 10% 1fr 2fr;
+	max-height: 100vh;
+	row-gap: var(--main-gap);
+	padding: var(--main-padding);
+
+	div {
+		display: flex;
+	}
+
+	> :first-child {
+		justify-content: flex-end;
+	}
+
+	h1 {
+		justify-self: center;
+		align-self: self-end;
+		font-size: 40px; // поменять на миксин
+	}
+}
+
+.progress-bar {
+	flex-direction: column;
+	justify-self: center;
+	align-self: self-start;
+
+	progress {
+		width: var(--progress-bar-width);
+	}
+
+	img {
+		width: var(--animation-character-width);
+	}
+}

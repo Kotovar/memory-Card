@@ -42,25 +42,25 @@ function App() {
 		9: 8,
 	};
 
-	useEffect(() => {
-		async function loadImages(firstImage) {
-			const images = await downloadImages(firstImage);
-			setCards((prevCards) => {
-				const newImages = images.filter((image) => {
-					return !prevCards.some((card) => card[0] === image[0]);
-				});
-				return [...prevCards, ...newImages];
-			});
-		}
-		for (let i = 0; i < NUMBER_OF_ALL_IMAGES; i++) {
-			loadImages(FIRST_IMAGE + i * 1);
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	// useEffect(() => {
+	// 	async function loadImages(firstImage) {
+	// 		const images = await downloadImages(firstImage);
+	// 		setCards((prevCards) => {
+	// 			const newImages = images.filter((image) => {
+	// 				return !prevCards.some((card) => card[0] === image[0]);
+	// 			});
+	// 			return [...prevCards, ...newImages];
+	// 		});
+	// 	}
+	// 	for (let i = 0; i < NUMBER_OF_ALL_IMAGES; i++) {
+	// 		loadImages(FIRST_IMAGE + i * 1);
+	// 	}
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, []);
 
 	useEffect(() => {
 		if (cards.length === NUMBER_OF_ALL_IMAGES && !onloadImagesStart) {
-			preloadImages(cards); // проверка созданного массива на предзагрузку всех изображений
+			preloadImages(cards);
 			setOnloadImagesStart(true);
 		}
 	}, [NUMBER_OF_ALL_IMAGES, cards, onloadImagesStart]);
@@ -118,7 +118,7 @@ function App() {
 					setOnloadImagesFinish(true);
 				}
 			};
-			// Обработка ошибок на случай, если изображение не может быть загружено
+
 			imgObject[2].onerror = () => {
 				setGameState('loadingError');
 				console.error(

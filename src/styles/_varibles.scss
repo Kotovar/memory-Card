@@ -1,5 +1,12 @@
 :root {
+	--number-of-images: 80;
+	--animation-character-width: 50px;
+	--progress-bar-width: calc(
+		var(--animation-character-width) + (var(--number-of-images) * 2 * 1px)
+	);
 	--container-width: 100vw;
+	--main-padding: 20px;
+	--main-gap: 50px;
 
 	--transition-duration: 0.2s;
 	--turn-duration: 1.5s;
