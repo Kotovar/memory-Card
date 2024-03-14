@@ -1,15 +1,18 @@
 import StartPage from './StartPage';
 import ActiveGame from './ActiveGame';
 import Loading from './Loading';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 
 function App() {
 	const initialScore = 0;
 	const [bestResult, setBestResult] = useState(loadFromLocalStorage());
 	const [difficult, setDifficult] = useState('easy'); // 'easy', 'medium', 'hard'
 	const [gameState, setGameState] = useState('loading'); // 'loading', 'start', 'У', 'win', 'defeat'
-	const [loadingFinish, setLoadingFinish] = useState(false); // загрузилось ли минимальное количество изображений
+	const [onloadImagesFinish, setOnloadImagesFinish] = useState(false); // загрузились ли все изображения
+	const [onloadImagesStart, setOnloadImagesStart] = useState(false); // началась ли загрузка изображений
 	const [cards, setCards] = useState([]); // массив всех изображений
+
+	const [loadedImages, setLoadedImages] = useState(0);
 
 	const FIRST_IMAGE = 84;
 	const LAST_IMAGE = 164;
@@ -57,13 +60,17 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-		if (cards.length === NUMBER_OF_ALL_IMAGES && !loadingFinish) {
-			setLoadingFinish(true);
-			setGameState('start');
+		if (cards.length === NUMBER_OF_ALL_IMAGES && !onloadImagesStart) {
 			preloadImages(cards); // проверка созданного массива на предзагрузку всех изображений
+			setOnloadImagesStart(true);
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [cards]);
+	}, [NUMBER_OF_ALL_IMAGES, cards, onloadImagesStart]);
+
+	useEffect(() => {
+		if (onloadImagesFinish) {
+			setGameState('start');
+		}
+	}, [onloadImagesFinish]);
 
 	async function downloadImages(firstImage) {
 		let imagesArray = [];
@@ -100,17 +107,18 @@ function App() {
 	}
 
 	function preloadImages(imageArray) {
+		console.log('пошла загрузка');
 		let loadedCount = 0;
 		const totalImages = imageArray.length;
 
 		imageArray.forEach((imgObject) => {
-			console.log('пошла загрузка');
 			imgObject[2].onload = () => {
 				loadedCount++;
+				setLoadedImages(loadedCount);
 				if (loadedCount === totalImages) {
 					// Все изображения загружены
 					console.log('Все изображения загружены и готовы к использованию.');
-					// Здесь можно вызвать функцию обратного вызова или обновить состояние
+					setOnloadImagesFinish(true);
 				}
 			};
 			// Обработка ошибок на случай, если изображение не может быть загружено
@@ -157,7 +165,12 @@ function App() {
 
 	return (
 		<>
-			{gameState === 'loading' && <Loading />}
+			{gameState === 'loading' && (
+				<Loading
+					onloadImagesStart={onloadImagesStart}
+					progressValue={cards.length + loadedImages}
+				/>
+			)}
 			{gameState === 'start' && (
 				<StartPage onChangeDifficult={changeDifficult} />
 			)}
