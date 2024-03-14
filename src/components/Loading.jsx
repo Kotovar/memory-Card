@@ -5,16 +5,23 @@ export default function Loading({
 	onloadImagesStart,
 	progressValue,
 	progressMax,
+	error,
 }) {
 	return (
 		<>
-			<p>
-				{onloadImagesStart
-					? "It's okay, the game will start soon"
-					: 'Loading...'}
-			</p>
-			<progress max={progressMax} value={progressValue}></progress>
-			<img src={loadingImage} alt="Loading animation" />
+			{error ? (
+				<p>{error}</p>
+			) : (
+				<>
+					<p>
+						{onloadImagesStart
+							? "It's okay, the game will start soon"
+							: 'Loading...'}
+					</p>
+					<progress max={progressMax} value={progressValue}></progress>
+					<img src={loadingImage} alt="Loading animation" />
+				</>
+			)}
 		</>
 	);
 }
@@ -23,4 +30,5 @@ Loading.propTypes = {
 	onloadImagesStart: PropTypes.bool,
 	progressValue: PropTypes.number,
 	progressMax: PropTypes.number,
+	error: PropTypes.string,
 };

@@ -7,7 +7,7 @@ function App() {
 	const initialScore = 0;
 	const [bestResult, setBestResult] = useState(loadFromLocalStorage());
 	const [difficult, setDifficult] = useState('easy'); // 'easy', 'medium', 'hard'
-	const [gameState, setGameState] = useState('loading'); // 'loading', 'start', 'У', 'win', 'defeat'
+	const [gameState, setGameState] = useState('loading'); // 'loading', 'loadingError', 'start', 'game', 'win', 'defeat'
 	const [onloadImagesFinish, setOnloadImagesFinish] = useState(false); // загрузились ли все изображения
 	const [onloadImagesStart, setOnloadImagesStart] = useState(false); // началась ли загрузка изображений
 	const [cards, setCards] = useState([]); // массив всех изображений
@@ -107,7 +107,6 @@ function App() {
 	}
 
 	function preloadImages(imageArray) {
-		console.log('пошла загрузка');
 		let loadedCount = 0;
 		const totalImages = imageArray.length;
 
@@ -116,13 +115,12 @@ function App() {
 				loadedCount++;
 				setLoadedImages(loadedCount);
 				if (loadedCount === totalImages) {
-					// Все изображения загружены
-					console.log('Все изображения загружены и готовы к использованию.');
 					setOnloadImagesFinish(true);
 				}
 			};
 			// Обработка ошибок на случай, если изображение не может быть загружено
 			imgObject[2].onerror = () => {
+				setGameState('loadingError');
 				console.error(
 					`Ошибка при загрузке изображения с URL: ${imgObject.img.src}`,
 				);
@@ -165,11 +163,16 @@ function App() {
 
 	return (
 		<>
-			{gameState === 'loading' && (
+			{(gameState === 'loading' || gameState === 'loadingError') && (
 				<Loading
 					onloadImagesStart={onloadImagesStart}
 					progressValue={cards.length + loadedImages}
 					progressMax={NUMBER_OF_ALL_IMAGES * 2}
+					error={
+						gameState === 'loadingError'
+							? 'There was a loading error, please reload the page'
+							: ''
+					}
 				/>
 			)}
 			{gameState === 'start' && (
