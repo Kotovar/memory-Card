@@ -8,11 +8,10 @@ function App() {
 	const [bestResult, setBestResult] = useState(loadFromLocalStorage());
 	const [difficult, setDifficult] = useState('easy'); // 'easy', 'medium', 'hard'
 	const [gameState, setGameState] = useState('loading'); // 'loading', 'loadingError', 'start', 'game', 'win', 'defeat'
-	const [onloadImagesFinish, setOnloadImagesFinish] = useState(false); // загрузились ли все изображения
-	const [onloadImagesStart, setOnloadImagesStart] = useState(false); // началась ли загрузка изображений
-	const [cards, setCards] = useState([]); // массив всех изображений
-
+	const [onloadImagesFinish, setOnloadImagesFinish] = useState(false);
+	const [onloadImagesStart, setOnloadImagesStart] = useState(false);
 	const [loadedImages, setLoadedImages] = useState(0);
+	const [cards, setCards] = useState([]);
 
 	const FIRST_IMAGE = 84;
 	const LAST_IMAGE = 164;
@@ -103,6 +102,7 @@ function App() {
 			return [id, creatureData.data.name, img];
 		} catch (error) {
 			console.error('Error when retrieving creature data:', error);
+			setGameState('loadingError');
 		}
 	}
 
