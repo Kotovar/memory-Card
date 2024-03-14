@@ -1,7 +1,7 @@
 import StartPage from './StartPage';
 import ActiveGame from './ActiveGame';
 import Loading from './Loading';
-import {useState, useEffect, useRef} from 'react';
+import {useState, useEffect} from 'react';
 
 function App() {
 	const initialScore = 0;
@@ -169,6 +169,7 @@ function App() {
 				<Loading
 					onloadImagesStart={onloadImagesStart}
 					progressValue={cards.length + loadedImages}
+					progressMax={NUMBER_OF_ALL_IMAGES * 2}
 				/>
 			)}
 			{gameState === 'start' && (

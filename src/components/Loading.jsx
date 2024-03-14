@@ -1,7 +1,11 @@
 import PropTypes from 'prop-types';
 import loadingImage from '../assets/images/loading.webp';
 
-export default function Loading({onloadImagesStart, progressValue}) {
+export default function Loading({
+	onloadImagesStart,
+	progressValue,
+	progressMax,
+}) {
 	return (
 		<>
 			<p>
@@ -9,7 +13,7 @@ export default function Loading({onloadImagesStart, progressValue}) {
 					? "It's okay, the game will start soon"
 					: 'Loading...'}
 			</p>
-			<progress max="160" value={progressValue}></progress>
+			<progress max={progressMax} value={progressValue}></progress>
 			<img src={loadingImage} alt="Loading animation" />
 		</>
 	);
@@ -18,4 +22,5 @@ export default function Loading({onloadImagesStart, progressValue}) {
 Loading.propTypes = {
 	onloadImagesStart: PropTypes.bool,
 	progressValue: PropTypes.number,
+	progressMax: PropTypes.number,
 };
