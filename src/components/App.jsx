@@ -12,6 +12,7 @@ function App() {
 	const [onloadImagesStart, setOnloadImagesStart] = useState(false);
 	const [loadedImages, setLoadedImages] = useState(0);
 	const [cards, setCards] = useState([]);
+	const [brightness, setBrightness] = useState(100);
 
 	const FIRST_IMAGE = 84;
 	const LAST_IMAGE = 164;
@@ -42,6 +43,14 @@ function App() {
 		9: 8,
 	};
 
+	const changeBrightness = (newBrightness) => {
+		setBrightness(newBrightness);
+	};
+
+	useEffect(() => {
+		document.body.style.backdropFilter = `brightness(${brightness}%)`;
+	}, [brightness]);
+
 	// useEffect(() => {
 	// 	async function loadImages(firstImage) {
 	// 		const images = await downloadImages(firstImage);
@@ -68,6 +77,7 @@ function App() {
 	useEffect(() => {
 		if (onloadImagesFinish) {
 			setGameState('start');
+			changeBrightness(75);
 		}
 	}, [onloadImagesFinish]);
 
@@ -113,9 +123,11 @@ function App() {
 		imageArray.forEach((imgObject) => {
 			imgObject[2].onload = () => {
 				loadedCount++;
+				console.log('Пошла загрузка - ' + loadedCount);
 				setLoadedImages(loadedCount);
 				if (loadedCount === totalImages) {
 					setOnloadImagesFinish(true);
+					console.log('Все фото созданы!');
 				}
 			};
 

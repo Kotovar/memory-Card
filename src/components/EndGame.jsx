@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import {useRef} from 'react';
-import winImage from '../assets/images/win.webp';
-import loseImage from '../assets/images/lose.webp';
+import winImage from '../assets/images/animated/win.webp';
+import loseImage from '../assets/images/animated/lose.webp';
 
 export default function EndGame({onChangeMode, onCloseModal, isGameWon}) {
 	const dialogRef = useRef(null);

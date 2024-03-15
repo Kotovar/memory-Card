@@ -2,6 +2,8 @@
 	display: grid;
 	grid-template-rows: 10% 1fr 2fr;
 	max-height: 100vh;
+	height: 100vh;
+
 	row-gap: var(--main-gap);
 	padding: var(--main-padding);
 
@@ -16,7 +18,6 @@
 	h1 {
 		justify-self: center;
 		align-self: self-end;
-		font-size: 40px; // поменять на миксин
 	}
 }
 
@@ -27,6 +28,28 @@
 
 	progress {
 		width: var(--progress-bar-width);
+		height: 20px;
+		border: none;
+		// border: 1px solid black;
+		appearance: none;
+		background-color: var(--progress-bar-background);
+		border-radius: var(--border-radius-progress);
+		overflow: hidden;
+
+		&::-webkit-progress-bar {
+			background: var(--progress-bar-background);
+			border-radius: var(--border-radius-progress);
+		}
+
+		&::-webkit-progress-value {
+			background: var(--progress-bar-value);
+			border-radius: var(--border-radius-progress);
+		}
+
+		&::-moz-progress-bar {
+			background: var(--progress-bar-value);
+			border-radius: var(--border-radius-progress);
+		}
 	}
 
 	img {

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import backImage from '../assets/images/test.jpg';
+import backImage from '../assets/images/static/test.jpg';
 
 export default function GameCard({name, id, isFlipping, img}) {
 	return (

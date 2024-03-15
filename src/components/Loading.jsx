@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import loadingImage from '../assets/images/loading.webp';
-import loadingRunAnimation from '../assets/images/run.gif';
+import loadingImage from '../assets/images/animated/loading.webp';
+import loadingRunAnimation from '../assets/images/animated/run.gif';
 
 export default function Loading({
 	// onloadImagesStart,
@@ -30,7 +30,12 @@ export default function Loading({
 							alt="Loading animation"
 							style={{marginLeft: `${progressValue}px`}}
 						/>
-						<progress max={progressMax} value={progressValue}></progress>
+						<progress
+							max={progressMax}
+							// value={progressValue}
+							value="1"
+							aria-label="The game is loading"
+						></progress>
 					</div>
 				</>
 			)}
