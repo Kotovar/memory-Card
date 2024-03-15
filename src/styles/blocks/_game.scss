@@ -1,13 +1,22 @@
+.game--cards {
+	display: flex;
+	gap: var(--cards-gap);
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: var(--main-margin);
+}
+
 .game {
-	max-height: 100vh;
-	height: 100vh;
+	min-height: 100vh;
 	display: grid;
-	grid-template-rows: 10% 1fr;
+	padding-inline: var(--main-padding);
 
 	.game--information {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		margin-bottom: var(--main-margin);
 
 		.game-score {
 			display: flex;
@@ -18,12 +27,10 @@
 }
 
 .game-card {
-	background-color: rgba(0, 0, 0, 0.623);
-	border: 1px solid black;
-	border-radius: var(--border-radius-card);
 	min-width: calc(var(--image-padding) + var(--image-size));
 	min-height: calc(
-		var(--image-padding) + var(--image-size) + var(--card-inside-gap) + 24px
+		var(--image-padding) + var(--image-size) + var(--card-inside-gap) +
+			var(--card-font-size)
 	);
 
 	position: relative;
@@ -35,6 +42,9 @@
 		flex-direction: column;
 		row-gap: var(--card-inside-gap);
 		align-items: center;
+		background-color: rgba(0, 0, 0, 0.685);
+		border-radius: var(--border-radius-card);
+		border: 1px solid black;
 
 		img {
 			border-radius: var(--border-radius-card);
@@ -42,18 +52,26 @@
 
 		p {
 			color: white;
-			font-size: 24px;
+			font-size: var(--card-font-size);
+			height: var(--card-font-size);
 		}
 	}
 }
 
-// поменять
-.game--cards {
-	display: flex;
-	gap: var(--main-gap);
-	flex-wrap: wrap;
-	align-items: center;
-	justify-content: center;
+.game-card-back {
+	min-width: calc(var(--image-padding) + var(--image-size));
+	min-height: calc(
+		var(--image-padding) + var(--image-size) + var(--card-inside-gap) +
+			var(--card-font-size)
+	);
+
+	img {
+		border-radius: var(--border-radius-card);
+		min-height: calc(
+			var(--image-padding) + var(--image-size) + var(--card-inside-gap) +
+				var(--card-font-size)
+		);
+	}
 }
 
 .flip-in-front {
@@ -81,7 +99,6 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-
 	backface-visibility: hidden;
 }
 

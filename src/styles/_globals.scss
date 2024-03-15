@@ -14,15 +14,13 @@ body {
 	line-height: 1.28;
 	color: var(--main-font-color);
 	background-color: var(--main-bgrd-color);
-	// backdrop-filter: brightness(75%);
 
 	background-image: url('../assets/images/static/background.webp');
 	background-repeat: no-repeat;
 	background-size: cover;
-}
 
-#root {
-	backdrop-filter: brightness(75%);
+	background-attachment: fixed; /* Изображение остается неподвижным при прокрутке */
+	background-position: center center; /* Центрирование изображения */
 }
 
 a,

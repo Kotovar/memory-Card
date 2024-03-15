@@ -53,12 +53,14 @@ export default function ActiveGame({
 				isGameWon.current = true;
 				setGameOver(true);
 				onUpdateBestResult(newResult);
+				setIsClickable(false);
 			} else {
 				newRound();
 			}
 		} else if (currentId) {
 			onUpdateBestResult(currentResult);
 			setGameOver(true);
+			setIsClickable(false);
 		}
 	}
 
