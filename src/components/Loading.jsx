@@ -11,15 +11,9 @@ export default function Loading({
 	return (
 		<div className="loading">
 			{error ? (
-				<p>{error}</p>
+				<h1>{error}</h1>
 			) : (
 				<>
-					{/* <p>
-						{onloadImagesStart
-							? "It's okay, the game will start soon"
-							: 'Loading...'}
-					</p> */}
-
 					<div className="flickering-shield">
 						<img src={loadingImage} alt="Loading animation" />
 					</div>
@@ -32,8 +26,8 @@ export default function Loading({
 						/>
 						<progress
 							max={progressMax}
-							// value={progressValue}
-							value="1"
+							value={progressValue}
+							// value="15"
 							aria-label="The game is loading"
 						></progress>
 					</div>

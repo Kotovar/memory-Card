@@ -43,11 +43,11 @@ h1 {
 	@include fluid-text(44, 40);
 }
 
-// h2,
-// .h2 {
-// 	@include fluid-text(40, 36);
-// 	text-align: center;
-// }
+h2,
+.h2 {
+	@include fluid-text(40, 36);
+	text-align: center;
+}
 
 // h3,
 // .h3 {

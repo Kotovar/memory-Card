@@ -51,21 +51,21 @@ function App() {
 		document.body.style.backdropFilter = `brightness(${brightness}%)`;
 	}, [brightness]);
 
-	// useEffect(() => {
-	// 	async function loadImages(firstImage) {
-	// 		const images = await downloadImages(firstImage);
-	// 		setCards((prevCards) => {
-	// 			const newImages = images.filter((image) => {
-	// 				return !prevCards.some((card) => card[0] === image[0]);
-	// 			});
-	// 			return [...prevCards, ...newImages];
-	// 		});
-	// 	}
-	// 	for (let i = 0; i < NUMBER_OF_ALL_IMAGES; i++) {
-	// 		loadImages(FIRST_IMAGE + i * 1);
-	// 	}
-	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, []);
+	useEffect(() => {
+		async function loadImages(firstImage) {
+			const images = await downloadImages(firstImage);
+			setCards((prevCards) => {
+				const newImages = images.filter((image) => {
+					return !prevCards.some((card) => card[0] === image[0]);
+				});
+				return [...prevCards, ...newImages];
+			});
+		}
+		for (let i = 0; i < NUMBER_OF_ALL_IMAGES; i++) {
+			loadImages(FIRST_IMAGE + i * 1);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	useEffect(() => {
 		if (cards.length === NUMBER_OF_ALL_IMAGES && !onloadImagesStart) {
@@ -77,7 +77,7 @@ function App() {
 	useEffect(() => {
 		if (onloadImagesFinish) {
 			setGameState('start');
-			changeBrightness(75);
+			changeBrightness(100);
 		}
 	}, [onloadImagesFinish]);
 
@@ -123,11 +123,9 @@ function App() {
 		imageArray.forEach((imgObject) => {
 			imgObject[2].onload = () => {
 				loadedCount++;
-				console.log('Пошла загрузка - ' + loadedCount);
 				setLoadedImages(loadedCount);
 				if (loadedCount === totalImages) {
 					setOnloadImagesFinish(true);
-					console.log('Все фото созданы!');
 				}
 			};
 
@@ -143,10 +141,14 @@ function App() {
 	function changeDifficult(difficult) {
 		setDifficult(difficult);
 		setGameState('game');
+		changeBrightness(75);
 	}
 
 	function changeMode(mode) {
 		setGameState(mode);
+		if (mode === 'start') {
+			changeBrightness(100);
+		}
 	}
 
 	function updateBestResult(score) {
