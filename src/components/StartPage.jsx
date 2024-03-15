@@ -3,7 +3,7 @@ export default function StartPage({onChangeDifficult}) {
 	return (
 		<div className="gameContainer">
 			<div className="gameContainer-block">
-				<div className="greetings h2">Select difficulty</div>
+				<p className="greetings h2">Select difficulty</p>
 				<div className="difficult">
 					<button onClick={() => onChangeDifficult('easy')}>easy</button>
 					<button onClick={() => onChangeDifficult('medium')}>medium</button>

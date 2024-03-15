@@ -6,15 +6,17 @@
 	justify-content: center;
 
 	.gameContainer-block {
-		display: flex;
 		flex-direction: column;
 		align-items: center;
 		row-gap: var(--buttons-gap);
 	}
+
+	div {
+		display: flex;
+	}
 }
 
 .difficult {
-	display: flex;
 	column-gap: var(--buttons-gap);
 
 	button {

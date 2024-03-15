@@ -3,19 +3,17 @@ import backImage from '../assets/images/static/test.jpg';
 
 export default function GameCard({name, id, isFlipping, img}) {
 	return (
-		<div className="game-card">
-			<div
-				className={`game-card-front ${
-					isFlipping ? 'flip-in-front' : 'flip-out-front'
-				}`}
-			>
+		<div
+			className={`game-card ${isFlipping ? 'flip-in-front' : 'flip-out-front'}`}
+		>
+			<div className={`game-card-front`}>
 				<img
 					src={img.src}
 					alt={`Изображение ${name}`}
 					className="gameImage"
 					data-id={id}
 				/>
-				<p>{`Существо : ${name}`}</p>
+				<p>{name}</p>
 			</div>
 
 			<div

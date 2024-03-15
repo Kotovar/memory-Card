@@ -1,16 +1,59 @@
+.game {
+	max-height: 100vh;
+	height: 100vh;
+	display: grid;
+	grid-template-rows: 10% 1fr;
+
+	.game--information {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		.game-score {
+			display: flex;
+			column-gap: var(--main-gap);
+			padding-top: var(--main-padding);
+		}
+	}
+}
+
+.game-card {
+	background-color: rgba(0, 0, 0, 0.623);
+	border: 1px solid black;
+	border-radius: var(--border-radius-card);
+	min-width: calc(var(--image-padding) + var(--image-size));
+	min-height: calc(
+		var(--image-padding) + var(--image-size) + var(--card-inside-gap) + 24px
+	);
+
+	position: relative;
+	perspective: 1000px;
+
+	.game-card-front {
+		padding: var(--image-padding);
+		display: flex;
+		flex-direction: column;
+		row-gap: var(--card-inside-gap);
+		align-items: center;
+
+		img {
+			border-radius: var(--border-radius-card);
+		}
+
+		p {
+			color: white;
+			font-size: 24px;
+		}
+	}
+}
+
 // поменять
 .game--cards {
 	display: flex;
-	gap: 50px;
+	gap: var(--main-gap);
 	flex-wrap: wrap;
-}
-
-// основная карточка, задание перспективы
-.game-card {
-	width: 280px;
-	height: 280px;
-	position: relative;
-	perspective: 1000px;
+	align-items: center;
+	justify-content: center;
 }
 
 .flip-in-front {
@@ -33,16 +76,12 @@
 	transition: transform var(--turn-duration);
 }
 
-// лицевая и задняя часть
 .game-card-front,
 .game-card-back {
-	width: 100%;
-	height: 100%;
 	position: absolute;
 	top: 0;
 	left: 0;
 
-	/* скрывать заднюю часть объекта */
 	backface-visibility: hidden;
 }
 

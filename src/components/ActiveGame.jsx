@@ -135,22 +135,27 @@ export default function ActiveGame({
 
 	return (
 		<>
-			<div className="game--information">
-				<p>Active game</p>
-				<p>{`Score: ${currentResult}`}</p>
-				<p>{`Best score ${bestResult}`}</p>
-				<p>{`${selectedCards.current.length} / ${gameRounds[difficult]}`}</p>
-			</div>
-			<div className="game--cards" onClick={(e) => clickImage(e)}>
-				{currentGameCards.map((el) => (
-					// eslint-disable-next-line react/jsx-key
-					<GameCard
-						id={el[0]}
-						name={el[1]}
-						img={el[2]}
-						isFlipping={isFlipping}
-					/>
-				))}
+			<div className="game">
+				<div className="game--information">
+					<div className="game-score">
+						<p>{`Score: ${currentResult}`}</p>
+						<p>{`Best score: ${bestResult}`}</p>
+					</div>
+					<div className="game-round">
+						<p>{`Round ${selectedCards.current.length} / ${gameRounds[difficult]}`}</p>
+					</div>
+				</div>
+				<div className="game--cards" onClick={(e) => clickImage(e)}>
+					{currentGameCards.map((el) => (
+						// eslint-disable-next-line react/jsx-key
+						<GameCard
+							id={el[0]}
+							name={el[1]}
+							img={el[2]}
+							isFlipping={isFlipping}
+						/>
+					))}
+				</div>
 			</div>
 			<div className="game--dialog">
 				{gameOver && (
