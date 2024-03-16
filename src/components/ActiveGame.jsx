@@ -22,7 +22,7 @@ export default function ActiveGame({
 
 	const selectedCards = useRef([]);
 	const isGameWon = useRef(false);
-	const DURATION_ANIMATON = 1500;
+	const DURATION_ANIMATON = 1800;
 	const START_DURATION_ANIMATON = DURATION_ANIMATON / 2;
 
 	useEffect(() => {

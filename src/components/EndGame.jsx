@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import {useRef} from 'react';
+import {useRef, useEffect} from 'react';
 import winImage from '../assets/images/animated/win.webp';
 import loseImage from '../assets/images/animated/lose.webp';
 
@@ -12,12 +12,21 @@ export default function EndGame({onChangeMode, onCloseModal, isGameWon}) {
 		onCloseModal();
 	};
 
+	useEffect(() => {
+		if (dialogRef.current) dialogRef.current.showModal();
+		document.body.style.overflow = 'hidden';
+
+		return () => {
+			document.body.style.overflow = 'auto';
+		};
+	}, []);
+
 	return (
 		<dialog
 			ref={dialogRef}
 			id="finishGame"
 			aria-label="Show the modal window"
-			open
+			aria-modal="true"
 		>
 			Game over
 			<p>You {isGameWon ? 'Win' : 'Lose'} !</p>

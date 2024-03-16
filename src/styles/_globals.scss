@@ -19,8 +19,15 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 
-	background-attachment: fixed; /* Изображение остается неподвижным при прокрутке */
-	background-position: center center; /* Центрирование изображения */
+	background-attachment: fixed;
+	background-position: center center;
+
+	user-select: none;
+	scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+	width: 0;
 }
 
 a,

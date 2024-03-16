@@ -10,7 +10,6 @@
 .game {
 	min-height: 100vh;
 	display: grid;
-	padding-inline: var(--main-padding);
 
 	.game--information {
 		display: flex;
@@ -34,7 +33,7 @@
 	);
 
 	position: relative;
-	perspective: 1000px;
+	perspective: 2000px;
 
 	.game-card-front {
 		padding: var(--image-padding);
