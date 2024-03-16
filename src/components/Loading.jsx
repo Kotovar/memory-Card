@@ -2,12 +2,7 @@ import PropTypes from 'prop-types';
 import loadingImage from '../assets/images/animated/loading.webp';
 import loadingRunAnimation from '../assets/images/animated/run.gif';
 
-export default function Loading({
-	// onloadImagesStart,
-	progressValue,
-	progressMax,
-	error,
-}) {
+export default function Loading({progressValue, progressMax, error}) {
 	return (
 		<div className="loading">
 			{error ? (
@@ -27,9 +22,15 @@ export default function Loading({
 						<progress
 							max={progressMax}
 							value={progressValue}
-							// value="15"
 							aria-label="The game is loading"
 						></progress>
+					</div>
+					<div className="loading-text">
+						<p>
+							{progressValue >= progressMax / 2
+								? 'Click on unique images in rounds'
+								: 'Please wait'}
+						</p>
 					</div>
 				</>
 			)}

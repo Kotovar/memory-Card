@@ -28,11 +28,16 @@ export default function EndGame({onChangeMode, onCloseModal, isGameWon}) {
 			aria-label="Show the modal window"
 			aria-modal="true"
 		>
-			Game over
-			<p>You {isGameWon ? 'Win' : 'Lose'} !</p>
-			<img src={isGameWon ? winImage : loseImage} alt="Result image" />
-			<button onClick={() => closeDialog('game')}>Start again</button>
-			<button onClick={() => closeDialog('start')}>Change difficulty</button>
+			<div className="dialog-message">
+				<p className="h2">You {isGameWon ? 'Win' : 'Lose'} !</p>
+			</div>
+			<div className="dialog-image">
+				<img src={isGameWon ? winImage : loseImage} alt="Result image" />
+			</div>
+			<div className="dialog-buttons">
+				<button onClick={() => closeDialog('game')}>Start again</button>
+				<button onClick={() => closeDialog('start')}>Change difficulty</button>
+			</div>
 		</dialog>
 	);
 }

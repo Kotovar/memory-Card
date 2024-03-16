@@ -10,6 +10,7 @@
 .game {
 	min-height: 100vh;
 	display: grid;
+	align-items: start;
 
 	.game--information {
 		display: flex;
@@ -59,17 +60,25 @@
 
 .game-card-back {
 	min-width: calc(var(--image-padding) + var(--image-size));
-	min-height: calc(
+	// min-height: calc(
+	// 	var(--image-padding) + var(--image-size) + var(--card-inside-gap) +
+	// 		var(--card-font-size)
+	// );
+
+	height: calc(
 		var(--image-padding) + var(--image-size) + var(--card-inside-gap) +
 			var(--card-font-size)
 	);
 
 	img {
 		border-radius: var(--border-radius-card);
-		min-height: calc(
-			var(--image-padding) + var(--image-size) + var(--card-inside-gap) +
-				var(--card-font-size)
-		);
+
+		height: 100%;
+		width: 100%;
+		// height: calc(
+		// 	var(--image-padding) + var(--image-size) + var(--card-inside-gap) +
+		// 		var(--card-font-size)
+		// );
 	}
 }
 

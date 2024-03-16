@@ -1,6 +1,6 @@
 .loading {
 	display: grid;
-	grid-template-rows: 10% 1fr 2fr;
+	grid-template-rows: 10% 4fr 1fr 6fr;
 	max-height: 100vh;
 	height: 100vh;
 
@@ -11,13 +11,17 @@
 		display: flex;
 	}
 
+	h1 {
+		justify-self: center;
+		align-self: self-end;
+	}
+
 	> :first-child {
 		justify-content: flex-end;
 	}
 
-	h1 {
-		justify-self: center;
-		align-self: self-end;
+	> :last-child {
+		justify-content: center;
 	}
 }
 

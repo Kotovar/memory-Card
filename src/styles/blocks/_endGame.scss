@@ -1,9 +1,37 @@
-.game--dialog {
-	dialog {
-		background-color: rgba(250, 250, 250, 0.61);
+#finishGame {
+	display: flex;
+	background-color: #ffffff96;
+	border: 3px solid black;
+	border-radius: var(--border-radius-card);
+	flex-direction: column;
+	align-items: center;
 
-		&::backdrop {
-			background-color: rgba(0, 0, 0, 0.6);
+	&::backdrop {
+		background-color: rgba(0, 0, 0, 0.6);
+	}
+}
+
+.dialog-buttons {
+	display: flex;
+	column-gap: var(--small-gap);
+
+	button {
+		border: none;
+		background-color: transparent;
+
+		@include hover {
+			transform: scale(1.1);
 		}
+
+		@include fluid-text(22, 18);
+	}
+}
+
+.dialog-image {
+	min-height: 200px;
+
+	img {
+		max-width: 290px;
+		max-height: 200px;
 	}
 }
