@@ -6,6 +6,10 @@
 	font-display: swap;
 }
 
+html {
+	min-height: 100svh;
+}
+
 body {
 	@include fluid-text(18, 16);
 
