@@ -4,7 +4,7 @@ This is a game where you have to click on images that were not in previous round
 
 ![1](https://github.com/Kotovar/memory-Card/assets/77914431/bcfb3b61-0a3a-4660-91f8-4da02c26afdf)
 
-[Live preview]()
+[Live preview](https://main--memory-card-hyrule.netlify.app/)
 
 ## How to use
 
