@@ -28,6 +28,7 @@ body {
 	@include mobile {
 		background-size: auto 150%;
 		min-height: 100lvh;
+		background-attachment: scroll;
 	}
 }
 
