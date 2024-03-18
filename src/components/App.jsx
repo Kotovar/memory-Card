@@ -43,9 +43,18 @@ function App() {
 		9: 7,
 	};
 
-	const changeBrightness = (newBrightness) => {
-		setBrightness(newBrightness);
-	};
+	useEffect(() => {
+		const updateBackgroundSize = () => {
+			const height = window.innerHeight * 1.5 + 'px';
+			document.body.style.backgroundSize = `auto ${height}`;
+		};
+
+		window.addEventListener('scroll', updateBackgroundSize);
+
+		return () => {
+			window.removeEventListener('scroll', updateBackgroundSize);
+		};
+	}, []);
 
 	useEffect(() => {
 		document.body.style.backdropFilter = `brightness(${brightness}%)`;
@@ -92,6 +101,10 @@ function App() {
 		}
 		return imagesArray;
 	}
+
+	const changeBrightness = (newBrightness) => {
+		setBrightness(newBrightness);
+	};
 
 	async function getImageNameAndSource(id) {
 		try {

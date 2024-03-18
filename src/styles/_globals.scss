@@ -13,17 +13,20 @@ body {
 	font-weight: 400;
 	line-height: 1.28;
 	color: var(--main-font-color);
-	background-color: var(--main-bgrd-color);
 
+	background-color: var(--main-bgrd-color);
 	background-image: url('../assets/images/static/background.webp');
 	background-repeat: no-repeat;
 	background-size: cover;
-
 	background-attachment: fixed;
 	background-position: center center;
 
 	user-select: none;
 	scrollbar-width: none;
+
+	@include mobile {
+		background-size: auto 150lvh;
+	}
 }
 
 html::-webkit-scrollbar {
