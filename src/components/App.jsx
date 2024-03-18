@@ -121,21 +121,32 @@ function App() {
 		const totalImages = imageArray.length;
 
 		imageArray.forEach((imgObject) => {
-			imgObject[2].onload = () => {
+			const img = new Image();
+
+			img.onload = () => {
 				loadedCount++;
-				setLoadedImages(loadedCount);
-				if (loadedCount === totalImages) {
-					setOnloadImagesFinish(true);
-				}
+				updateLoadingState(loadedCount, totalImages);
 			};
 
-			imgObject[2].onerror = () => {
+			img.onerror = () => {
 				setGameState('loadingError');
-				console.error(
-					`Ошибка при загрузке изображения с URL: ${imgObject[2].src}`,
-				);
+				console.error(`Ошибка при загрузке изображения с URL: ${img.src}`);
 			};
+
+			img.src = imgObject[2].src;
+
+			if (img.complete) {
+				loadedCount++;
+				updateLoadingState(loadedCount, totalImages);
+			}
 		});
+	}
+
+	function updateLoadingState(loadedCount, totalImages) {
+		setLoadedImages(loadedCount);
+		if (loadedCount === totalImages) {
+			setOnloadImagesFinish(true);
+		}
 	}
 
 	function changeDifficult(difficult) {
