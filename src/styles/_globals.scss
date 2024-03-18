@@ -26,7 +26,8 @@ body {
 	scrollbar-width: none;
 
 	@include mobile {
-		background-size: auto 150vh;
+		background-size: auto 150%;
+		min-height: 100lvh;
 	}
 }
 
