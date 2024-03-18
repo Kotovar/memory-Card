@@ -17,13 +17,15 @@ body {
 
 	background-image: url('../assets/images/static/background.webp');
 	background-repeat: no-repeat;
-	// background-size: cover;
+	background-size: cover;
 
-	background-attachment: scroll;
+	background-attachment: fixed;
 	background-position: center center;
 
 	user-select: none;
 	scrollbar-width: none;
+
+	min-height: 100lvh;
 }
 
 html::-webkit-scrollbar {
