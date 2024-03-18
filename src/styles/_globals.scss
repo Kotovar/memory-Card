@@ -24,6 +24,10 @@ body {
 
 	user-select: none;
 	scrollbar-width: none;
+
+	@include mobile {
+		background-attachment: scroll;
+	}
 }
 
 html::-webkit-scrollbar {
