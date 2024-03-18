@@ -2,7 +2,7 @@
 
 This is a game where you have to click on images that were not in previous rounds
 
-Анимация
+![1](https://github.com/Kotovar/memory-Card/assets/77914431/bcfb3b61-0a3a-4660-91f8-4da02c26afdf)
 
 [Live preview]()
 
@@ -31,7 +31,7 @@ To create this application I used the following technologies:
 
 The game has 3 difficulty levels, the maximum result is saved in the browser. The game takes a long time to load due to receiving images via the API, this was done to improve skills in working with the API.
 
-Изображение
+![preview](https://github.com/Kotovar/memory-Card/assets/77914431/010d2634-c708-4c3e-a763-58ecb6323155)
 
 ## Credits
 
