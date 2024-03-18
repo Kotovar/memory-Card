@@ -1,8 +1,8 @@
 .loading {
 	display: grid;
 	grid-template-rows: 10% 4fr 1fr 6fr;
-	max-height: 100lvh;
-	height: 100lvh;
+	max-height: 100svh;
+	height: 100svh;
 
 	row-gap: var(--main-gap);
 	padding: var(--main-padding);
