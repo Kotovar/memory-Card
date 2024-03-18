@@ -2,14 +2,14 @@
 	@include visually-hidden;
 }
 
-.hidden-mobile {
-	@include mobile {
-		display: none !important;
-	}
-}
+// .hidden-mobile {
+// 	@include mobile {
+// 		display: none !important;
+// 	}
+// }
 
-.visible-mobile {
-	@include mobile-above {
-		display: none !important;
-	}
-}
+// .visible-mobile {
+// 	@include mobile-above {
+// 		display: none !important;
+// 	}
+// }

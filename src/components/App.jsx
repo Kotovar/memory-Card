@@ -27,7 +27,7 @@ function App() {
 	const gameNumberCardsForRound = {
 		easy: 3,
 		medium: 5,
-		hard: 10,
+		hard: 8,
 	};
 
 	const numberCardsToMix = {
@@ -37,10 +37,10 @@ function App() {
 		3: 2,
 		4: 2,
 		5: 3,
-		6: 5,
-		7: 6,
-		8: 7,
-		9: 8,
+		6: 4,
+		7: 5,
+		8: 6,
+		9: 7,
 	};
 
 	const changeBrightness = (newBrightness) => {

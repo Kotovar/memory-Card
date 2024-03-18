@@ -54,7 +54,26 @@
 			color: white;
 			font-size: var(--card-font-size);
 			height: var(--card-font-size);
+			overflow: hidden;
+
+			@include desktop {
+				--card-font-size: 18px;
+			}
+
+			@include mobile {
+				--card-font-size: 16px;
+			}
 		}
+	}
+
+	@include desktop {
+		--image-size: 200px;
+		--image-padding: 15px;
+	}
+
+	@include mobile {
+		--image-size: 160px;
+		--image-padding: 8px;
 	}
 }
 
