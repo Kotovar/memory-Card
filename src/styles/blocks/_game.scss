@@ -79,10 +79,6 @@
 
 .game-card-back {
 	min-width: calc(var(--image-padding) + var(--image-size));
-	// min-height: calc(
-	// 	var(--image-padding) + var(--image-size) + var(--card-inside-gap) +
-	// 		var(--card-font-size)
-	// );
 
 	height: calc(
 		var(--image-padding) + var(--image-size) + var(--card-inside-gap) +
@@ -94,10 +90,6 @@
 
 		height: 100%;
 		width: 100%;
-		// height: calc(
-		// 	var(--image-padding) + var(--image-size) + var(--card-inside-gap) +
-		// 		var(--card-font-size)
-		// );
 	}
 }
 

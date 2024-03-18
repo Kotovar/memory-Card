@@ -132,7 +132,7 @@ function App() {
 			imgObject[2].onerror = () => {
 				setGameState('loadingError');
 				console.error(
-					`Ошибка при загрузке изображения с URL: ${imgObject.img.src}`,
+					`Ошибка при загрузке изображения с URL: ${imgObject[2].src}`,
 				);
 			};
 		});

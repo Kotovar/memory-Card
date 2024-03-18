@@ -21,7 +21,6 @@ export default function GameCard({name, id, isFlipping, img}) {
 			<div
 				className={`game-card-back ${
 					isFlipping ? 'flip-in-back' : 'flip-out-back'
-					// isFlipping ? 'flip-out-back' : 'flip-in-back'
 				} `}
 			>
 				<img src={backImage} alt="backside" />

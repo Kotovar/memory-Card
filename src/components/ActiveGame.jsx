@@ -55,7 +55,7 @@ export default function ActiveGame({
 				onUpdateBestResult(newResult);
 				setIsClickable(false);
 			} else {
-				newRound();
+				requestAnimationFrame(newRound);
 			}
 		} else if (currentId) {
 			onUpdateBestResult(currentResult);
@@ -113,11 +113,13 @@ export default function ActiveGame({
 			gameNumberCardsForRound[difficult],
 		);
 
-		setTimeout(() => {
-			setCurrentGameCards(randomCards);
-			setIsClickable(true);
-			setIsFlipping(false);
-		}, DURATION_ANIMATON);
+		requestAnimationFrame(() => {
+			setTimeout(() => {
+				setCurrentGameCards(randomCards);
+				setIsClickable(true);
+				setIsFlipping(false);
+			}, DURATION_ANIMATON);
+		});
 	}
 
 	function closeModal() {
