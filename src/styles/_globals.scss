@@ -23,10 +23,6 @@ body {
 
 	user-select: none;
 	scrollbar-width: none;
-
-	@include mobile {
-		background-size: auto 150lvh;
-	}
 }
 
 html::-webkit-scrollbar {
