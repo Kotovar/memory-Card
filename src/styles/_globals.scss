@@ -14,11 +14,11 @@ body {
 	line-height: 1.28;
 	color: var(--main-font-color);
 	background-color: var(--main-bgrd-color);
-	min-height: 100svh;
+	min-height: 100lvh;
 
 	background-image: url('../assets/images/static/background.webp');
 	background-repeat: no-repeat;
-	// background-size: cover;
+	background-size: cover;
 
 	background-attachment: fixed;
 	background-position: center center;
