@@ -65,23 +65,23 @@ export default function ActiveGame({
 	}
 
 	function getRandomElements(arr, count) {
-		const usedCardsForMix = shuffle(selectedCards.current); // перемешанный массив всех уже использованных карточек
-		const currentCardsForMix = numberCardsToMix[selectedCards.current.length]; // количество карт для микса раунда
+		const usedCardsForMix = shuffle(selectedCards.current);
+		const currentCardsForMix = numberCardsToMix[selectedCards.current.length];
 		const currentShuffledIdCardsForMix = usedCardsForMix.slice(
 			0,
 			currentCardsForMix,
-		); // массив индексов, которые должны быть замешаны в изначальный массив
+		);
 
 		let startArr = currentShuffledIdCardsForMix.map((id) =>
 			arr.find((el) => el[0] === Number(id)),
-		); // Уже использованные карточки, для замешивания в новый список
+		);
 
 		let startId = currentShuffledIdCardsForMix.map((id) =>
 			arr.findIndex((el) => el[0] === Number(id)),
-		); // id уже использованных карточкек из оригинального массива изображений, для замешивания в новый список
+		);
 
 		const randomElements = [...startArr];
-		const usedIndices = new Set(startId); // Добавление индексов, чтобы такие элементы не замешивались в новый список карточек
+		const usedIndices = new Set(startId);
 
 		while (randomElements.length < count) {
 			const randomIndex = Math.floor(Math.random() * arr.length);
@@ -149,9 +149,8 @@ export default function ActiveGame({
 						<p>{`Round ${selectedCards.current.length} / ${gameRounds[difficult]}`}</p>
 					</div>
 				</div>
-				<div className="game--cards" onClick={(e) => clickImage(e)}>
+				<button className="game--cards" onClick={(e) => clickImage(e)}>
 					{currentGameCards.map((el) => (
-						// eslint-disable-next-line react/jsx-key
 						<GameCard
 							id={el[0]}
 							name={el[1]}
@@ -159,7 +158,7 @@ export default function ActiveGame({
 							isFlipping={isFlipping}
 						/>
 					))}
-				</div>
+				</button>
 			</div>
 			<div className="game--dialog">
 				{gameOver && (

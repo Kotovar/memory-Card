@@ -32,7 +32,7 @@ export default function EndGame({onChangeMode, onCloseModal, isGameWon}) {
 				<p className="h2">You {isGameWon ? 'Win' : 'Lose'} !</p>
 			</div>
 			<div className="dialog-image">
-				<img src={isGameWon ? winImage : loseImage} alt="Result image" />
+				<img src={isGameWon ? winImage : loseImage} alt="Result" />
 			</div>
 			<div className="dialog-buttons">
 				<button onClick={() => closeDialog('game')}>Start again</button>

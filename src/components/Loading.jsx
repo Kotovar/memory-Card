@@ -39,7 +39,6 @@ export default function Loading({progressValue, progressMax, error}) {
 }
 
 Loading.propTypes = {
-	onloadImagesStart: PropTypes.bool,
 	progressValue: PropTypes.number,
 	progressMax: PropTypes.number,
 	error: PropTypes.string,

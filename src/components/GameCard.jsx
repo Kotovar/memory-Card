@@ -37,6 +37,5 @@ GameCard.propTypes = {
 	src: PropTypes.string,
 	id: PropTypes.number,
 	isFlipping: PropTypes.bool,
-	isNew: PropTypes.bool,
 	img: PropTypes.object,
 };
