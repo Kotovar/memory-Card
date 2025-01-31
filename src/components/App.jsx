@@ -112,7 +112,7 @@ function App() {
 	async function getImageNameAndSource(id) {
 		try {
 			const creatureResponse = await fetch(
-				`https://botw-compendium.herokuapp.com/api/v2/entry/${id}`,
+				`https://botw-compendium.herokuapp.com/api/v3/compendium/entry/${id}`,
 			);
 
 			if (!creatureResponse.ok) {
